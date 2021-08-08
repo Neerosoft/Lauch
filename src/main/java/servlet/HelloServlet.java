@@ -1,6 +1,8 @@
 package servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -19,7 +21,11 @@ public class HelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         ServletOutputStream out = resp.getOutputStream();
-        out.write("hello heroku".getBytes());
+        PrintStream s=new PrintStream(out);
+        File f=new File(".");
+    
+        s.println(f.getAbsolutePath()+"\n");
+        s.println("hello heroku");
         out.flush();
         out.close();
     }
